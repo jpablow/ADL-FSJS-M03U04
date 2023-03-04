@@ -48,3 +48,40 @@ const propiedadesJSON = [
     m: 500
   }
 ];
+
+const propdiv = document.querySelector(".propiedades");
+let q = 0, Mi = 0, Mf = 1000;
+
+function filtroProp(q, Mi, Mf) {
+  let i=0;
+  for (let prop of propiedadesJSON) {
+    if (prop.rooms >= q && prop.m >= Mi && prop.m <= Mf) {
+      propdiv.innerHTML += `
+      <div class="propiedad">
+        <div class="img" style="background-image: url('${prop.src}')"></div>
+        <section>
+          <h5>${prop.name}</h5>
+          <div class="d-flex justify-content-between">
+            <p>Cuartos: ${prop.rooms}</p>
+            <p>Metros: ${prop.m}</p>
+          </div>
+          <p class="my-3">${prop.description}</p>
+          <button class="btn btn-info ">Ver más</button>
+        </section>
+      </div>
+    `
+    i = i + 1;
+    }
+  }
+  console.log(i);
+  proptotal = document.querySelector("#proptot");
+  proptot.innerHTML = i;
+}
+
+filtroProp(q, Mi, Mf);
+
+
+function total() {
+  proptotal = document.querySelector("#proptot");
+  proptot.innerHTML = i;
+};
