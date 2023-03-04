@@ -49,9 +49,6 @@ const propiedadesJSON = [
   }
 ];
 
-const propdiv = document.querySelector(".propiedades");
-let q = 0, Mi = 0, Mf = 1000;
-
 function filtroProp(q, Mi, Mf) {
   let i=0;
   for (let prop of propiedadesJSON) {
@@ -73,15 +70,11 @@ function filtroProp(q, Mi, Mf) {
     i = i + 1;
     }
   }
-  console.log(i);
-  proptotal = document.querySelector("#proptot");
+  const proptot = document.querySelector("#proptot");
   proptot.innerHTML = i;
 }
 
+const propdiv = document.querySelector(".propiedades");
+let q = 0, Mi = 0, Mf = 1000;
+
 filtroProp(q, Mi, Mf);
-
-
-function total() {
-  proptotal = document.querySelector("#proptot");
-  proptot.innerHTML = i;
-};
