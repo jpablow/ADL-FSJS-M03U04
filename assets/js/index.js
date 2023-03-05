@@ -50,7 +50,8 @@ const propiedadesJSON = [
 ];
 
 function filtroProp(q, Mi, Mf) {
-  let i=0;
+  let i = 0;
+  propdiv.innerHTML = "";
   for (let prop of propiedadesJSON) {
     if (prop.rooms >= q && prop.m >= Mi && prop.m <= Mf) {
       propdiv.innerHTML += `
@@ -66,15 +67,32 @@ function filtroProp(q, Mi, Mf) {
           <button class="btn btn-info ">Ver más</button>
         </section>
       </div>
-    `
-    i = i + 1;
-    }
-  }
+      `
+      i++;
+    };
+  };
   const proptot = document.querySelector("#proptot");
   proptot.innerHTML = i;
-}
+};
+
+function validar() {
+  let q = document.querySelector("#inputQ").value, Mi = document.querySelector("#inputMi").value, Mf = document.querySelector("#inputMf").value;
+  q = Number(q), Mi = Number(Mi), Mf = Number(Mf);
+  if (q == "" || Mi == "" || Mf == "") {
+    alert("Ninguno de los valores que ingrese puede ser cero o estar vacío, debe llenar todos los campos necesarios para buscar: Cuartos, Metros cuadrados desde y hasta.");
+  } else if (q < 1) {
+    alert("Todas las propiedades tienen al menos 1 cuarto, verifique la cantidad de cuartos para filtrar correctamente.");
+  } else if (Mi < 6 || Mf < 6) {
+    alert("La propiedad más pequeña es de 6 Metros cuadrados, verifique la cantidad de Metros cuadrados para filtrar correctamente.");
+  } else if (Mf < Mi) {
+    alert(`La cantidad de Metros cuadrados hasta debe ser igual o mayor que ${Mi}.`);
+  } else {
+    filtroProp(q, Mi, Mf);
+  };
+};
 
 const propdiv = document.querySelector(".propiedades");
-let q = 0, Mi = 0, Mf = 1000;
-
-filtroProp(q, Mi, Mf);
+const body = document.querySelector("body");
+body.addEventListener("load", filtroProp(0, 0, 1000));
+const button = document.querySelector("button");
+button.addEventListener("click", validar);
